@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
     StyleSheet,
     Text,
@@ -9,6 +10,7 @@ import {
 export default function HeroSection() {
   const { width } = useWindowDimensions();
   const isWeb = width >= 768;
+  const [btnHovered, setBtnHovered] = useState(false);
 
   return (
     <View style={[styles.container, isWeb && styles.containerWeb]}>
@@ -36,7 +38,13 @@ export default function HeroSection() {
           <TouchableOpacity style={styles.dropdown}>
             <Text style={styles.dropdownText}>Female ▾</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.findButton}>
+
+          {/* FIND NOW BUTONU - hover efekti var */}
+          <TouchableOpacity
+            style={[styles.findButton, btnHovered && styles.findButtonHovered]}
+            onMouseEnter={() => setBtnHovered(true)}
+            onMouseLeave={() => setBtnHovered(false)}
+          >
             <Text style={styles.findButtonText}>Find Now</Text>
           </TouchableOpacity>
         </View>
@@ -45,9 +53,7 @@ export default function HeroSection() {
       {/* SAĞ TARAF - Telefon Mockup */}
       {isWeb && (
         <View style={styles.right}>
-          <View style={styles.phoneMockup}>
-            <View style={styles.phoneInner} />
-          </View>
+          <View style={styles.phoneMockup} />
         </View>
       )}
     </View>
@@ -113,6 +119,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 50,
     marginLeft: 8,
+    transition: "all 0.3s ease",
+  },
+  // Hover - biraz büyüsün ve koyulaşsın
+  findButtonHovered: {
+    backgroundColor: "#EA7C1E",
+    transform: [{ scale: 1.05 }],
   },
   findButtonText: {
     color: "#FFFFFF",
@@ -128,14 +140,5 @@ const styles = StyleSheet.create({
     height: 500,
     backgroundColor: "#F9A8A8",
     borderRadius: 32,
-    padding: 16,
-    alignItems: "center",
-  },
-  phoneInner: {
-    width: "100%",
-    height: "60%",
-    backgroundColor: "#FFFFFF",
-    borderRadius: 20,
-    marginTop: "auto",
   },
 });

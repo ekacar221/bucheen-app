@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -5,6 +6,43 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
+
+// Her link için ayrı hover state tutan component
+function NavLink({ label, active }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <Text
+      style={[
+        styles.link,
+        active && styles.linkActive,
+        hovered && styles.linkHovered,
+      ]}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {label}
+    </Text>
+  );
+}
+
+// Her buton için ayrı hover state tutan component
+function NavButton({ label, outline }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <TouchableOpacity
+      style={[
+        outline ? styles.signIn : styles.signUp,
+        hovered && (outline ? styles.signInHovered : styles.signUpHovered),
+      ]}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <Text style={outline ? styles.signInText : styles.signUpText}>
+        {label}
+      </Text>
+    </TouchableOpacity>
+  );
+}
 
 export default function Navbar() {
   const { width } = useWindowDimensions();
@@ -21,22 +59,18 @@ export default function Navbar() {
       {/* LINKLER - sadece geniş ekranda */}
       {isWeb && (
         <View style={styles.links}>
-          <Text style={styles.linkActive}>Home</Text>
-          <Text style={styles.link}>Service</Text>
-          <Text style={styles.link}>About</Text>
-          <Text style={styles.link}>Pricing</Text>
-          <Text style={styles.link}>Support</Text>
+          <NavLink label="Home" active />
+          <NavLink label="Service" />
+          <NavLink label="About" />
+          <NavLink label="Pricing" />
+          <NavLink label="Support" />
         </View>
       )}
 
       {/* BUTONLAR */}
       <View style={styles.buttons}>
-        <TouchableOpacity style={styles.signIn}>
-          <Text style={styles.signInText}>Sign In</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.signUp}>
-          <Text style={styles.signUpText}>Sign Up</Text>
-        </TouchableOpacity>
+        <NavButton label="Sign In" outline />
+        <NavButton label="Sign Up" />
       </View>
     </View>
   );
@@ -57,8 +91,10 @@ const styles = StyleSheet.create({
   logoPurple: { fontSize: 22, fontWeight: "bold", color: "#7C3AED" },
   logoOrange: { fontSize: 22, fontWeight: "bold", color: "#FB923C" },
   links: { flexDirection: "row" },
-  linkActive: { color: "#FB923C", fontWeight: "500", marginRight: 32 },
-  link: { color: "#6B7280", marginRight: 32 },
+  link: { color: "#6B7280", marginRight: 32, transition: "all 0.2s ease" },
+  linkActive: { color: "#FB923C", fontWeight: "500" },
+  // Hover - turuncu renk al
+  linkHovered: { color: "#FB923C" },
   buttons: { flexDirection: "row" },
   signIn: {
     borderWidth: 1,
@@ -67,6 +103,11 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 999,
     marginRight: 12,
+    transition: "all 0.2s ease",
+  },
+  // Hover - arka plan turuncu olsun
+  signInHovered: {
+    backgroundColor: "#FFF0E6",
   },
   signInText: { color: "#FB923C", fontWeight: "500" },
   signUp: {
@@ -74,6 +115,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 999,
+    transition: "all 0.2s ease",
+  },
+  // Hover - koyulaşsın
+  signUpHovered: {
+    backgroundColor: "#EA7C1E",
+    transform: [{ scale: 1.05 }],
   },
   signUpText: { color: "#FFFFFF", fontWeight: "500" },
 });
