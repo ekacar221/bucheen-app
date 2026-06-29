@@ -3,6 +3,7 @@
     "name": "bucheen-app",
     "slug": "bucheen-app",
     "version": "1.0.0",
+    "main": "App.js",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "bucheenapp",
