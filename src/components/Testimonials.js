@@ -25,7 +25,6 @@ const testimonials = [
   },
 ];
 
-// Tek bir kart componenti - hover state burada yönetilir
 function TestimonialCard({ item, isWeb }) {
   const [hovered, setHovered] = useState(false);
 
@@ -34,14 +33,11 @@ function TestimonialCard({ item, isWeb }) {
       style={[
         styles.card,
         isWeb && styles.cardWeb,
-        // Hover olunca yukarı kalk ve gölge ekle
         hovered && styles.cardHovered,
       ]}
-      // Web'de mouse olayları
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* AVATAR + İSİM */}
       <View style={styles.header}>
         <View style={styles.avatar} />
         <View>
@@ -50,10 +46,8 @@ function TestimonialCard({ item, isWeb }) {
         </View>
       </View>
 
-      {/* YORUM */}
       <Text style={styles.comment}>{item.comment}</Text>
 
-      {/* YILDIZLAR */}
       <Text style={styles.stars}>{"★".repeat(item.rating)}</Text>
     </View>
   );
@@ -110,15 +104,13 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     padding: 24,
     marginBottom: 16,
-    // Geçiş efekti için
     transition: "all 0.3s ease",
   },
   cardWeb: { width: "30%" },
-  // Hover durumunda yukarı kalk
   cardHovered: {
     transform: [{ translateY: -8 }],
-    borderColor: "#FB923C",
-    boxShadow: "0px 12px 24px rgba(251, 146, 60, 0.15)",
+    borderColor: "#FF6B6B",
+    boxShadow: "0px 12px 24px rgba(255, 107, 107, 0.15)",
   },
   header: {
     flexDirection: "row",

@@ -7,7 +7,6 @@ import {
   View,
 } from "react-native";
 
-// Her link için ayrı hover state tutan component
 function NavLink({ label, active }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -25,7 +24,6 @@ function NavLink({ label, active }) {
   );
 }
 
-// Her buton için ayrı hover state tutan component
 function NavButton({ label, outline }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -56,7 +54,7 @@ export default function Navbar() {
         <Text style={styles.logoOrange}>cheen</Text>
       </View>
 
-      {/* LINKLER - sadece geniş ekranda */}
+      {/* LINKLER */}
       {isWeb && (
         <View style={styles.links}>
           <NavLink label="Home" active />
@@ -89,37 +87,34 @@ const styles = StyleSheet.create({
   },
   logo: { flexDirection: "row" },
   logoPurple: { fontSize: 22, fontWeight: "bold", color: "#7C3AED" },
-  logoOrange: { fontSize: 22, fontWeight: "bold", color: "#FB923C" },
+  logoOrange: { fontSize: 22, fontWeight: "bold", color: "#FF6B6B" },
   links: { flexDirection: "row" },
   link: { color: "#6B7280", marginRight: 32, transition: "all 0.2s ease" },
-  linkActive: { color: "#FB923C", fontWeight: "500" },
-  // Hover - turuncu renk al
-  linkHovered: { color: "#FB923C" },
+  linkActive: { color: "#FF6B6B", fontWeight: "500" },
+  linkHovered: { color: "#FF6B6B" },
   buttons: { flexDirection: "row" },
   signIn: {
     borderWidth: 1,
-    borderColor: "#FB923C",
+    borderColor: "#FF6B6B",
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 999,
     marginRight: 12,
     transition: "all 0.2s ease",
   },
-  // Hover - arka plan turuncu olsun
   signInHovered: {
-    backgroundColor: "#FFF0E6",
+    backgroundColor: "#FFF0EE",
   },
-  signInText: { color: "#FB923C", fontWeight: "500" },
+  signInText: { color: "#FF6B6B", fontWeight: "500" },
   signUp: {
-    backgroundColor: "#FB923C",
+    backgroundColor: "#FF6B6B",
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 999,
     transition: "all 0.2s ease",
   },
-  // Hover - koyulaşsın
   signUpHovered: {
-    backgroundColor: "#EA7C1E",
+    backgroundColor: "#E85555",
     transform: [{ scale: 1.05 }],
   },
   signUpText: { color: "#FFFFFF", fontWeight: "500" },

@@ -1,10 +1,11 @@
 import { useState } from "react";
 import {
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    useWindowDimensions,
-    View,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
 } from "react-native";
 
 export default function HeroSection() {
@@ -14,15 +15,12 @@ export default function HeroSection() {
 
   return (
     <View style={[styles.container, isWeb && styles.containerWeb]}>
-      {/* SOL TARAF */}
       <View style={[styles.left, isWeb && styles.leftWeb]}>
-        {/* BAŞLIK */}
         <Text style={styles.title}>
           Find <Text style={styles.titleHighlight}>Match Now</Text>
           {"\n"}and Grow Your{"\n"}Feelings
         </Text>
 
-        {/* AÇIKLAMA */}
         <Text style={styles.description}>
           There are so many platforms from this Pokan to make a task manager
           manage all your time, the data needed is very useful and we have it
@@ -39,7 +37,7 @@ export default function HeroSection() {
             <Text style={styles.dropdownText}>Female ▾</Text>
           </TouchableOpacity>
 
-          {/* FIND NOW BUTONU - hover efekti var */}
+          {/* FIND NOW BUTONU */}
           <TouchableOpacity
             style={[styles.findButton, btnHovered && styles.findButtonHovered]}
             onMouseEnter={() => setBtnHovered(true)}
@@ -50,10 +48,13 @@ export default function HeroSection() {
         </View>
       </View>
 
-      {/* SAĞ TARAF - Telefon Mockup */}
       {isWeb && (
         <View style={styles.right}>
-          <View style={styles.phoneMockup} />
+          <Image
+            source={require("../../assets/images/Mask_Group.png")}
+            style={styles.mockupImage}
+            resizeMode="contain"
+          />
         </View>
       )}
     </View>
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     lineHeight: 60,
     marginBottom: 20,
   },
-  titleHighlight: { color: "#FB923C" },
+  titleHighlight: { color: "#FF6B6B" },
   description: {
     fontSize: 15,
     color: "#6B7280",
@@ -114,16 +115,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#E5E7EB",
   },
   findButton: {
-    backgroundColor: "#FB923C",
+    backgroundColor: "#FF6B6B",
     paddingHorizontal: 24,
     paddingVertical: 10,
     borderRadius: 50,
     marginLeft: 8,
     transition: "all 0.3s ease",
   },
-  // Hover - biraz büyüsün ve koyulaşsın
   findButtonHovered: {
-    backgroundColor: "#EA7C1E",
+    backgroundColor: "#E85555",
     transform: [{ scale: 1.05 }],
   },
   findButtonText: {
@@ -134,11 +134,11 @@ const styles = StyleSheet.create({
   right: {
     flex: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
-  phoneMockup: {
-    width: 280,
-    height: 500,
-    backgroundColor: "#F9A8A8",
-    borderRadius: 32,
+  mockupImage: {
+    width: "100%",
+    maxWidth: 820,
+    aspectRatio: 556 / 599,
   },
 });
